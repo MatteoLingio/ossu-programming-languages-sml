@@ -41,4 +41,14 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
 	  else number_in_months(dates, tl months) + sum
 	end;
 
-number_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) ;
+fun dates_in_month(dates: (int*int*int) list, month: int) =
+	if null dates 
+	then []
+	else
+	let
+	  val date_list = dates_in_month(tl dates, month)
+	in
+	if(#2 (hd dates)) = month
+	then (hd dates) :: date_list
+	else date_list
+	end
