@@ -52,3 +52,17 @@ fun dates_in_month(dates: (int*int*int) list, month: int) =
 	then (hd dates) :: date_list
 	else date_list
 	end
+
+fun dates_in_months(dates: (int*int*int) list, months: int list) =
+	if null months 
+	then []
+	else
+	let
+	  val date_list = dates_in_month(dates, hd months)
+	in
+	if (null date_list)
+	then date_list
+	else date_list @ dates_in_months(dates, tl months)
+	end;
+
+dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) 

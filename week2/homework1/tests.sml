@@ -10,7 +10,6 @@ val test2_older = is_older ((2012,7,4),(1999,8,9)) = false
 val test3_older = is_older ((2011,9,4),(2011,9,4)) = false
 val test4_older = is_older ((2022,8,9),(2022,12,12)) = true
 
-
 val test1_n_in_month = number_in_month ([(2012,2,28),(2013,12,1)],2) = 1
 val test2_n_in_month = number_in_month ([(2021,5,7), (1999,5,21), (2011,6,9), (2,5,3)], 5) = 3
 val test3_n_in_month = number_in_month ([],2) = 0
@@ -25,10 +24,13 @@ val test1_dates_in_month = dates_in_month ([(2012,2,28),(2013,12,1)],2) = [(2012
 val test2_dates_in_month = dates_in_month ([(2012,3,28),(2013,3,1)],3) = [(2012,3,28), (2013,3,1)]
 val test3_dates_in_month = dates_in_month ([(2012,2,28),(2013,12,1), (2013,2,1)],2) = [(2012,2,28), (2013,2,1)]
 val test4_dates_in_month = dates_in_month ([],2) = []
+
+val test1_dates_in_months = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)]
+val test2_dates_in_months = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[12]) = [(2013,12,1)]
+val test3_dates_in_months = dates_in_months ([],[2,3,4]) = []
+val test4_dates_in_months = dates_in_months ([(2012,3,28),(2013,3,1),(2011,3,31),(2011,3,28)],[3]) = [(2012,3,28),(2013,3,1),(2011,3,31),(2011,3,28)]
+
 (*)
-
-val test5 = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) = [(2012,2,28),(2011,3,31),(2011,4,28)]
-
 val test6 = get_nth (["hi", "there", "how", "are", "you"], 2) = "there"
 
 val test7 = date_to_string (2013, 6, 1) = "June 1, 2013"
