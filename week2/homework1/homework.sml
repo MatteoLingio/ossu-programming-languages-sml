@@ -1,16 +1,3 @@
-fun day_of_year(month: int, day_of_month: int) =
-	let
-		val month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 31, 31];
-		fun sum_month_days (month: int, month_days: int list, pos: int) = 
-			if month > 12 orelse month <= 0
-			then 0
-			else if month - 1 = pos 
-			then hd month_days
-			else hd month_days + sum_month_days(month, tl month_days, pos + 1)
-	in
-		sum_month_days(month - 1, month_days, 0) + day_of_month
-	end
-
 fun days_in_date(year: int, month: int, day: int) =
 	year * 365 + month * 12 + day * 30
 
@@ -75,4 +62,11 @@ fun get_nth(strings: string list, n: int) =
 			else helper(tl strings, pos + 1)
 	in
 		helper(strings, 0)
+	end
+
+fun date_to_string(date: (int*int*int)) =
+	let
+		val months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"] 
+	in
+		get_nth(months, #2 date) ^ " " ^ Int.toString (#3 date) ^ ", " ^ Int.toString (#1 date)
 	end
