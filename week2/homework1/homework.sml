@@ -58,11 +58,21 @@ fun dates_in_months(dates: (int*int*int) list, months: int list) =
 	then []
 	else
 	let
-	  val date_list = dates_in_month(dates, hd months)
+		val date_list = dates_in_month(dates, hd months)
 	in
-	if (null date_list)
-	then date_list
-	else date_list @ dates_in_months(dates, tl months)
+		if (null date_list)
+		then date_list
+		else date_list @ dates_in_months(dates, tl months)
 	end;
 
-dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28)],[2,3,4]) 
+fun get_nth(strings: string list, n: int) =
+	let
+		fun helper(strings: string list, pos: int) =
+			if null strings
+			then ""
+			else if n - 1 = pos
+			then hd strings
+			else helper(tl strings, pos + 1)
+	in
+		helper(strings, 0)
+	end
