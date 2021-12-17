@@ -1,8 +1,11 @@
-fun days_in_date(year: int, month: int, day: int) =
-	year * 365 + month * 12 + day * 30
-
 fun is_older (date_one: int*int*int, date_two: int*int*int) =
-	days_in_date(#1 date_one, #2 date_one, #3 date_one) < days_in_date(#1 date_two, #2 date_two, #3 date_two)
+	let
+	  val is_year_older = #1 date_one < #1 date_two
+	  val is_month_older = #1 date_one = #1 date_two andalso #2 date_one < #2 date_two
+	  val is_day_older = #1 date_one = #1 date_two andalso #2 date_one = #2 date_two andalso #3 date_one < #3 date_two
+	in
+	  is_year_older orelse is_month_older orelse is_day_older
+	end
 
 fun number_in_month(dates: (int*int*int) list, month: int) =
 	if null dates
@@ -96,4 +99,21 @@ fun month_range(day1: int, day2: int) =
 		else what_month(day) :: helper(day + 1)
 	in
 	  helper(day1)
+	end
+
+fun oldest(dates: (int*int*int) list) =
+	if null dates
+	then NONE
+	else let
+	  fun oldest_of_two(d1: (int*int*int), d2: (int*int*int)) =
+	  	if is_older(d1, d2)
+		then d1
+		else d2
+
+	  fun helper(dates: (int*int*int) list, current_oldest: (int*int*int)) =
+	  	if null dates
+		then SOME(current_oldest)
+		else helper(tl dates, oldest_of_two(hd dates, current_oldest))
+	in
+	  helper(dates, hd dates)
 	end
