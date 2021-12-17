@@ -2,7 +2,7 @@ fun days_in_date(year: int, month: int, day: int) =
 	year * 365 + month * 12 + day * 30
 
 fun is_older (date_one: int*int*int, date_two: int*int*int) =
-	days_in_date(#1 date_one, #2 date_one, #3 date_one) < days_in_date(#1 date_two, #2 date_two, #3 date_two);
+	days_in_date(#1 date_one, #2 date_one, #3 date_one) < days_in_date(#1 date_two, #2 date_two, #3 date_two)
 
 fun number_in_month(dates: (int*int*int) list, month: int) =
 	if null dates
@@ -26,18 +26,18 @@ fun number_in_months(dates: (int*int*int) list, months: int list) =
 	  if (sum = 0)
 	  then 0
 	  else number_in_months(dates, tl months) + sum
-	end;
+	end
 
 fun dates_in_month(dates: (int*int*int) list, month: int) =
 	if null dates 
 	then []
 	else
 	let
-	  val date_list = dates_in_month(tl dates, month)
+	  	val date_list = dates_in_month(tl dates, month)
 	in
-	if(#2 (hd dates)) = month
-	then (hd dates) :: date_list
-	else date_list
+		if(#2 (hd dates)) = month
+		then (hd dates) :: date_list
+		else date_list
 	end
 
 fun dates_in_months(dates: (int*int*int) list, months: int list) =
@@ -50,7 +50,7 @@ fun dates_in_months(dates: (int*int*int) list, months: int list) =
 		if (null date_list)
 		then date_list
 		else date_list @ dates_in_months(dates, tl months)
-	end;
+	end
 
 fun get_nth(strings: string list, n: int) =
 	let
