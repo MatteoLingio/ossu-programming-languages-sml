@@ -70,3 +70,20 @@ fun date_to_string(date: (int*int*int)) =
 	in
 		get_nth(months, #2 date) ^ " " ^ Int.toString (#3 date) ^ ", " ^ Int.toString (#1 date)
 	end
+
+fun number_before_reaching_sum(sum: int, int_list: int list) =
+	let
+		fun helper(current_sum: int, int_list: int list, pos: int) =
+			if current_sum >= sum
+			then pos - 1
+			else helper(current_sum + hd int_list, tl int_list, pos + 1)
+	in
+	  helper(0, int_list, 0)
+	end
+
+fun what_month(month: int) =
+	let
+	  val days_per_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	in
+	  number_before_reaching_sum(month, days_per_month) + 1
+	end;
